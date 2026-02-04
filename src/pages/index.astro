@@ -1,17 +1,22 @@
 ---
-
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+  title="Proxilyt | Local SEO Analytics"
+  description="Local competitive analytics made actionable."
+>
+  <main>
+    <header>
+      <h1>Local SEO, without the guesswork</h1>
+      <p>
+        Proxilyt shows you where you rank, how visible you really are,
+        and what your competitors are doing — all in one place.
+      </p>
+
+      <a href="https://app.proxilyt.com" rel="nofollow">
+        Open App
+      </a>
+    </header>
+  </main>
+</BaseLayout>
