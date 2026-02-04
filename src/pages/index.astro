@@ -6,17 +6,436 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   title="Proxilyt | Local SEO Analytics"
   description="Local competitive analytics made actionable."
 >
-  <main>
-    <header>
-      <h1>Local SEO, without the guesswork</h1>
-      <p>
-        Proxilyt shows you where you rank, how visible you really are,
-        and what your competitors are doing — all in one place.
-      </p>
-
-      <a href="https://app.proxilyt.com" rel="nofollow">
-        Open App
-      </a>
-    </header>
-  </main>
+<div class="relative min-h-screen w-full flex flex-col dot-pattern">
+      <!-- Header -->
+      <header
+        class="flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-200 px-10 py-5 bg-white/80 backdrop-blur-md sticky top-0 z-50"
+      >
+        <div class="flex items-center gap-4 text-primary">
+          <div class="size-8">
+            <svg
+              fill="none"
+              viewBox="0 0 48 48"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                clip-rule="evenodd"
+                d="M24 18.4228L42 11.475V34.3663C42 34.7796 41.7457 35.1504 41.3601 35.2992L24 42V18.4228Z"
+                fill="currentColor"
+                fill-rule="evenodd"
+              ></path>
+              <path
+                clip-rule="evenodd"
+                d="M24 8.18819L33.4123 11.574L24 15.2071L14.5877 11.574L24 8.18819ZM9 15.8487L21 20.4805V37.6263L9 32.9945V15.8487ZM27 37.6263V20.4805L39 15.8487V32.9945L27 37.6263ZM25.354 2.29885C24.4788 1.98402 23.5212 1.98402 22.646 2.29885L4.98454 8.65208C3.7939 9.08038 3 10.2097 3 11.475V34.3663C3 36.0196 4.01719 37.5026 5.55962 38.098L22.9197 44.7987C23.6149 45.0671 24.3851 45.0671 25.0803 44.7987L42.4404 38.098C43.9828 37.5026 45 36.0196 45 34.3663V11.475C45 10.2097 44.2061 9.08038 43.0155 8.65208L25.354 2.29885Z"
+                fill="currentColor"
+                fill-rule="evenodd"
+              ></path>
+            </svg>
+          </div>
+          <h2 class="text-xl font-bold leading-tight tracking-[-0.015em]">
+            Proxilyt
+          </h2>
+        </div>
+        <div class="flex flex-1 justify-end gap-8">
+          <div class="hidden md:flex items-center gap-9">
+            <a
+              class="text-sm font-medium hover:text-primary transition-colors"
+              href="#features"
+              >Features</a
+            >
+          </div>
+          <div class="flex gap-4">
+            <button
+              class="flex min-w-[84px] cursor-pointer items-center justify-center rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold shadow-lg shadow-primary/20 hover:scale-105 transition-transform"
+            >
+              <span>Get Started</span>
+            </button>
+            <button
+              class="flex min-w-[84px] cursor-pointer items-center justify-center rounded-lg h-10 px-4 bg-gray-100 text-sm font-bold hover:bg-gray-200 transition-colors"
+            >
+              <span>Login</span>
+            </button>
+          </div>
+        </div>
+      </header>
+      <!-- Hero Section -->
+      <main class="flex-grow flex flex-col items-center">
+        <div
+          class="max-w-[1280px] w-full px-6 py-8 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center"
+        >
+          <div class="flex flex-col gap-8 order-2 lg:order-1">
+            <div class="flex flex-col gap-4">
+              <span
+                class="text-primary font-bold tracking-widest text-xs uppercase"
+                >Premium SEO Intelligence</span
+              >
+              <h1
+                class="text-4xl md:text-6xl font-black leading-[1.1] tracking-[-0.03em]"
+              >
+                Local SEO Insights at the
+                <span class="text-primary">Speed of Light.</span>
+              </h1>
+              <p
+                class="text-lg md:text-xl text-gray-600 max-w-[540px] leading-relaxed"
+              >
+                Unlock hyper-local rankings and data-driven insights to dominate
+                your local market with precision analytics.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-4">
+              <button
+                class="flex min-w-[160px] cursor-pointer items-center justify-center rounded-xl h-14 px-8 bg-primary text-white text-base font-bold shadow-xl shadow-primary/30 hover:shadow-primary/40 transition-all"
+              >
+                <span>Get Started</span>
+              </button>
+              <button
+                class="flex min-w-[160px] cursor-pointer items-center justify-center rounded-xl h-14 px-8 border-2 border-gray-200 text-base font-bold hover:bg-white transition-all"
+              >
+                <span>Watch Demo</span>
+              </button>
+            </div>
+            <div
+              class="flex items-center gap-4 pt-4 border-t border-gray-100"
+            >
+              <div class="flex -space-x-3">
+                <div
+                  class="h-10 w-10 rounded-full border-2 border-white bg-gray-200"
+                  data-alt="Profile picture of a marketing specialist"
+                ></div>
+                <div
+                  class="h-10 w-10 rounded-full border-2 border-white bg-gray-300"
+                  data-alt="Profile picture of a business owner"
+                ></div>
+                <div
+                  class="h-10 w-10 rounded-full border-2 border-white bg-gray-400"
+                  data-alt="Profile picture of an SEO expert"
+                ></div>
+              </div>
+              <p class="text-sm text-gray-500">
+                Trusted by 2,000+ local agencies
+              </p>
+            </div>
+          </div>
+          <!-- Geometric Grid Hero Element -->
+          <div
+            class="order-1 lg:order-2 relative aspect-square max-w-[500px] mx-auto w-full grid grid-cols-5 gap-3"
+          >
+            {
+              [
+                'bg-gray-100',
+                'bg-gray-100',
+                'bg-primary/20',
+                'bg-gray-100',
+                'bg-gray-100',
+                'bg-gray-100',
+                'bg-primary shadow-lg shadow-primary/40',
+                'bg-gray-100',
+                'bg-accent/40',
+                'bg-gray-100',
+                'bg-primary/40',
+                'bg-gray-100',
+                'bg-accent shadow-lg shadow-accent/40',
+                'bg-gray-100',
+                'bg-primary/60',
+                'bg-gray-100',
+                'bg-accent/20',
+                'bg-gray-100',
+                'bg-primary shadow-lg shadow-primary/40',
+                'bg-gray-100',
+                'bg-gray-100',
+                'bg-gray-100',
+                'bg-primary/30',
+                'bg-gray-100',
+                'bg-gray-100',
+              ].map((bg) => (
+                <div class={`rounded-lg ${bg} shadow-sm transition-all hover:scale-110`}></div>
+              ))
+            }
+          </div>
+        </div>
+        <!-- Features Section -->
+        <section id="features" class="max-w-[1280px] w-full px-6 py-20 flex flex-col gap-16">
+          <div
+            class="flex flex-col md:flex-row justify-between items-end gap-6"
+          >
+            <div class="flex flex-col gap-4 max-w-[600px]">
+              <h2
+                class="text-3xl md:text-5xl font-black leading-tight tracking-tight"
+              >
+                Engineered for Local Dominance
+              </h2>
+              <p class="text-lg text-gray-600">
+                Advanced tools designed to give you a competitive edge in local
+                search rankings across any geographical grid.
+              </p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Card 1 -->
+            <div
+              class="glass-card p-8 rounded-2xl flex flex-col gap-6 group hover:border-primary/50 transition-all cursor-default shadow-sm hover:shadow-xl"
+            >
+              <div
+                class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all"
+              >
+                <span class="material-symbols-outlined text-3xl"
+                  >my_location</span
+                >
+              </div>
+              <div class="flex flex-col gap-3">
+                <h3 class="text-xl font-bold leading-tight">
+                  Precision Tracking
+                </h3>
+                <p class="text-gray-600 leading-relaxed">
+                  Track your rankings across thousands of locations with
+                  pin-point accuracy using our proprietary geofencing.
+                </p>
+              </div>
+              <div
+                class="mt-auto pt-4 flex items-center text-primary font-bold text-sm gap-2 opacity-0 group-hover:opacity-100 transition-opacity"
+              >
+                Learn more
+                <span class="material-symbols-outlined text-sm"
+                  >arrow_forward</span
+                >
+              </div>
+            </div>
+            <!-- Card 2 -->
+            <div
+              class="glass-card p-8 rounded-2xl flex flex-col gap-6 group hover:border-primary/50 transition-all cursor-default shadow-sm hover:shadow-xl"
+            >
+              <div
+                class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all"
+              >
+                <span class="material-symbols-outlined text-3xl">insights</span>
+              </div>
+              <div class="flex flex-col gap-3">
+                <h3 class="text-xl font-bold leading-tight">
+                  Real-time Analytics
+                </h3>
+                <p class="text-gray-600 leading-relaxed">
+                  Monitor fluctuations as they happen with our lightning-fast
+                  data processing and instant push notifications.
+                </p>
+              </div>
+              <div
+                class="mt-auto pt-4 flex items-center text-primary font-bold text-sm gap-2 opacity-0 group-hover:opacity-100 transition-opacity"
+              >
+                Learn more
+                <span class="material-symbols-outlined text-sm"
+                  >arrow_forward</span
+                >
+              </div>
+            </div>
+            <!-- Card 3 -->
+            <div
+              class="glass-card p-8 rounded-2xl flex flex-col gap-6 group hover:border-primary/50 transition-all cursor-default shadow-sm hover:shadow-xl"
+            >
+              <div
+                class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all"
+              >
+                <span class="material-symbols-outlined text-3xl"
+                  >analytics</span
+                >
+              </div>
+              <div class="flex flex-col gap-3">
+                <h3 class="text-xl font-bold leading-tight">
+                  Competitive Benchmarking
+                </h3>
+                <p class="text-gray-600 leading-relaxed">
+                  See how you stack up against local rivals with deep-dive
+                  performance metrics and market share analysis.
+                </p>
+              </div>
+              <div
+                class="mt-auto pt-4 flex items-center text-primary font-bold text-sm gap-2 opacity-0 group-hover:opacity-100 transition-opacity"
+              >
+                Learn more
+                <span class="material-symbols-outlined text-sm"
+                  >arrow_forward</span
+                >
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- CTA Section -->
+        <section class="max-w-[1120px] w-full px-6 py-20">
+          <div
+            class="relative bg-primary rounded-[2.5rem] overflow-hidden p-8 md:p-20 text-center text-white flex flex-col items-center gap-8"
+          >
+            <!-- Background shapes -->
+            <div
+              class="absolute top-0 left-0 w-full h-full opacity-10 dot-pattern pointer-events-none"
+            ></div>
+            <div
+              class="absolute -top-24 -right-24 w-96 h-96 bg-accent rounded-full blur-[100px] opacity-20"
+            ></div>
+            <h2
+              class="text-3xl md:text-5xl font-black max-w-[800px] relative z-10"
+            >
+              Ready to illuminate your local presence?
+            </h2>
+            <p
+              class="text-lg md:text-xl text-white/80 max-w-[640px] relative z-10"
+            >
+              Join the top-tier agencies using Proxilyt to scale their local SEO
+              operations and deliver undeniable ROI to their clients.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 relative z-10">
+              <button
+                class="flex min-w-[200px] cursor-pointer items-center justify-center rounded-xl h-14 px-8 bg-white text-primary text-base font-bold shadow-xl hover:scale-105 transition-all"
+              >
+                <span>Start Free Trial</span>
+              </button>
+              <button
+                class="flex min-w-[200px] cursor-pointer items-center justify-center rounded-xl h-14 px-8 border-2 border-white/30 text-white text-base font-bold hover:bg-white/10 transition-all"
+              >
+                <span>Contact Sales</span>
+              </button>
+            </div>
+            <p class="text-sm text-white/60 relative z-10">
+              No credit card required • 14-day free trial
+            </p>
+          </div>
+        </section>
+      </main>
+      <!-- Footer -->
+      <footer
+        class="border-t border-gray-200 bg-white/50 backdrop-blur-sm px-10 py-16 flex flex-col gap-12"
+      >
+        <div
+          class="max-w-[1280px] w-full mx-auto grid grid-cols-1 md:grid-cols-4 gap-12"
+        >
+          <div class="flex flex-col gap-6">
+            <div class="flex items-center gap-3 text-primary">
+              <div class="size-6">
+                <svg
+                  fill="none"
+                  viewBox="0 0 48 48"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    clip-rule="evenodd"
+                    d="M24 18.4228L42 11.475V34.3663C42 34.7796 41.7457 35.1504 41.3601 35.2992L24 42V18.4228Z"
+                    fill="currentColor"
+                    fill-rule="evenodd"
+                  ></path>
+                  <path
+                    clip-rule="evenodd"
+                    d="M24 8.18819L33.4123 11.574L24 15.2071L14.5877 11.574L24 8.18819ZM9 15.8487L21 20.4805V37.6263L9 32.9945V15.8487ZM27 37.6263V20.4805L39 15.8487V32.9945L27 37.6263ZM25.354 2.29885C24.4788 1.98402 23.5212 1.98402 22.646 2.29885L4.98454 8.65208C3.7939 9.08038 3 10.2097 3 11.475V34.3663C3 36.0196 4.01719 37.5026 5.55962 38.098L22.9197 44.7987C23.6149 45.0671 24.3851 45.0671 25.0803 44.7987L42.4404 38.098C43.9828 37.5026 45 36.0196 45 34.3663V11.475C45 10.2097 44.2061 9.08038 43.0155 8.65208L25.354 2.29885Z"
+                    fill="currentColor"
+                    fill-rule="evenodd"
+                  ></path>
+                </svg>
+              </div>
+              <h2 class="text-xl font-bold leading-tight tracking-[-0.015em]">
+                Proxilyt
+              </h2>
+            </div>
+            <p class="text-gray-500 text-sm max-w-[240px]">
+              The leading platform for local search performance and competitive
+              intelligence.
+            </p>
+          </div>
+          <div class="flex flex-col gap-4">
+            <h4 class="font-bold text-sm uppercase tracking-wider">Product</h4>
+            <a
+              class="text-gray-500 hover:text-primary transition-colors text-sm"
+              href="#"
+              >Features</a
+            >
+            <a
+              class="text-gray-500 hover:text-primary transition-colors text-sm"
+              href="#"
+              >Integrations</a
+            >
+            <a
+              class="text-gray-500 hover:text-primary transition-colors text-sm"
+              href="#"
+              >Pricing</a
+            >
+            <a
+              class="text-gray-500 hover:text-primary transition-colors text-sm"
+              href="#"
+              >Changelog</a
+            >
+          </div>
+          <div class="flex flex-col gap-4">
+            <h4 class="font-bold text-sm uppercase tracking-wider">
+              Resources
+            </h4>
+            <a
+              class="text-gray-500 hover:text-primary transition-colors text-sm"
+              href="#"
+              >Documentation</a
+            >
+            <a
+              class="text-gray-500 hover:text-primary transition-colors text-sm"
+              href="#"
+              >Help Center</a
+            >
+            <a
+              class="text-gray-500 hover:text-primary transition-colors text-sm"
+              href="#"
+              >Community</a
+            >
+            <a
+              class="text-gray-500 hover:text-primary transition-colors text-sm"
+              href="#"
+              >Blog</a
+            >
+          </div>
+          <div class="flex flex-col gap-4">
+            <h4 class="font-bold text-sm uppercase tracking-wider">Legal</h4>
+            <a
+              class="text-gray-500 hover:text-primary transition-colors text-sm"
+              href="#"
+              >Privacy Policy</a
+            >
+            <a
+              class="text-gray-500 hover:text-primary transition-colors text-sm"
+              href="#"
+              >Terms of Service</a
+            >
+            <a
+              class="text-gray-500 hover:text-primary transition-colors text-sm"
+              href="#"
+              >Cookie Policy</a
+            >
+            <a
+              class="text-gray-500 hover:text-primary transition-colors text-sm"
+              href="#"
+              >Security</a
+            >
+          </div>
+        </div>
+        <div
+          class="max-w-[1280px] w-full mx-auto border-t border-gray-100 pt-8 flex flex-col md:flex-row justify-between items-center gap-6"
+        >
+          <p class="text-gray-400 text-sm">
+            © 2024 Proxilyt Inc. All rights reserved.
+          </p>
+          <div class="flex gap-6">
+            <a
+              class="text-gray-400 hover:text-primary transition-colors"
+              href="#"
+            >
+              <span class="material-symbols-outlined">public</span>
+            </a>
+            <a
+              class="text-gray-400 hover:text-primary transition-colors"
+              href="#"
+            >
+              <span class="material-symbols-outlined">share</span>
+            </a>
+            <a
+              class="text-gray-400 hover:text-primary transition-colors"
+              href="#"
+            >
+              <span class="material-symbols-outlined">alternate_email</span>
+            </a>
+          </div>
+        </div>
+      </footer>
+    </div>
 </BaseLayout>
