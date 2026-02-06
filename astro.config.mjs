@@ -6,8 +6,8 @@ import tailwind from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://www.proxilyt.com',
-  base: '/',
+  site: "https://subclassy.github.io",
+  base: "/proxilyt-marketing/",
   output: 'static',
   integrations: [sitemap()],
 
