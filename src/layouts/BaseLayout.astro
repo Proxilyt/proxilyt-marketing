@@ -24,10 +24,10 @@ const {
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={Astro.url.href} />
-    <meta property="og:image" content="/og.png" />
+    <meta property="og:image" content={`${import.meta.env.BASE_URL}og.png`} />
 
     <!-- Favicon -->
-    <link rel="icon" href="/favicon.svg" />
+    <link rel="icon" href={`${import.meta.env.BASE_URL}favicon.svg`} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
