@@ -3,25 +3,30 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout
-  title="Proxilyt | Local SEO Analytics"
-  description="Local competitive analytics made actionable."
+  title="Proxilyt | Local SEO Analytics & Competitive Intelligence"
+  description="Transform local search data into actionable growth strategies. Track competitor rankings, analyze local keywords, and dominate your market."
 >
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <div class="relative min-h-screen w-full flex flex-col dot-pattern">
-    <!-- Header -->
+    <!-- Header / Navigation -->
     <header
       class="flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-200 px-10 py-5 bg-white/80 backdrop-blur-md sticky top-0 z-50"
+      role="banner"
     >
       <div class="flex items-center gap-4 text-primary">
-        <img src={`${import.meta.env.BASE_URL}favicon.svg`} alt="Proxilyt" class="size-10" />
-        <h2
+        <img 
+          src={`${import.meta.env.BASE_URL}favicon.svg`} 
+          alt="Proxilyt logo" 
+          class="size-10" 
+        />
+        <h1
           class="text-2xl font-semibold leading-tight tracking-[-0.015em] mt-[12px] ml-[-6px]"
           style="font-family: 'League Spartan', sans-serif;"
         >
           Proxilyt
-        </h2>
+        </h1>
       </div>
-      <div class="flex flex-1 justify-end gap-8">
+      <nav class="flex flex-1 justify-end gap-8">
         <div class="hidden sm:flex items-center gap-9">
           <a
             class="text-sm font-medium hover:text-primary transition-colors"
@@ -36,13 +41,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             <span>Get Started</span>
           </a>
         </div>
-      </div>
+      </nav>
     </header>
-    <!-- Hero Section -->
-    <main class="flex-grow flex flex-col items-center">
+    <!-- Main Content -->
+    <main id="main-content" class="flex-grow flex flex-col items-center">
       <div class="relative w-full overflow-hidden flex flex-col items-center">
         <div
           class="absolute inset-0 pointer-events-none z-0 lg:hidden floating-grid opacity-[0.4]"
+          aria-hidden="true"
         >
           <div
             class="absolute inset-0 grid grid-cols-6 grid-rows-8 gap-4 p-4 opacity-40"
@@ -79,24 +85,23 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             </div>
           </div>
         </div>
-        <div class="max-w-[1280px] w-full px-6 py-8 relative z-10">
+        <!-- Hero Section -->
+        <section class="max-w-[1280px] w-full px-6 py-8 relative z-10">
           <div
             class="flex flex-col lg:grid lg:grid-cols-2 gap-12 lg:gap-16 items-center"
           >
-            <div
-              class="flex flex-col gap-8 order-1 items-center text-center lg:items-start lg:text-left"
-            >
+            <article class="flex flex-col gap-8 order-1 items-center text-center lg:items-start lg:text-left">
               <div class="flex flex-col gap-4">
                 <span
                   class="text-primary font-bold tracking-widest text-xs uppercase"
                   >Local SEO Intelligence</span
                 >
-                <h1
+                <h2
                   class="text-4xl md:text-6xl lg:text-6xl font-black leading-[1.1] tracking-[-0.03em]"
                 >
                   Local competitive analytics made
                   <span class="text-primary">Actionable.</span>
-                </h1>
+                </h2>
                 <p
                   class="text-lg md:text-xl text-gray-600 max-w-[540px] leading-relaxed mx-auto lg:mx-0"
                 >
@@ -123,17 +128,17 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                 <div class="flex -space-x-3">
                   <img 
                     src={`${import.meta.env.BASE_URL}iec_logo.png`} 
-                    alt="Partner logo" 
+                    alt="IEC partner logo - trusted by local agencies" 
                     class="h-10 w-10 rounded-full border-2 border-white object-cover"
                   />
                   <img 
                     src={`${import.meta.env.BASE_URL}homebuild_logo.jpg`} 
-                    alt="Partner logo" 
+                    alt="HomeBuild partner logo - trusted by local agencies" 
                     class="h-10 w-10 rounded-full border-2 border-white object-cover"
                   />
                   <img 
                     src={`${import.meta.env.BASE_URL}ktc_logo.jpg`} 
-                    alt="Partner logo" 
+                    alt="KTC partner logo - trusted by local agencies" 
                     class="h-10 w-10 rounded-full border-2 border-white object-cover"
                   />
                 </div>
@@ -141,9 +146,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                   Trusted by local agencies
                 </p>
               </div>
-            </div>
+            </article>
             <div
               class="hidden lg:grid order-2 relative aspect-square max-w-[500px] mx-auto w-full grid-cols-5 gap-3"
+              aria-hidden="true"
             >
               <div
                 class="rounded-lg bg-gray-100 shadow-sm transition-all hover:scale-110"
@@ -247,7 +253,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
               </div>
             </div>
           </div>
-        </div>
+        </section>
       </div>
       <!-- Features Section -->
       <section
@@ -268,18 +274,18 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div
+          <article
             class="flex flex-col gap-3 rounded-xl border border-[#dddde4] bg-white p-6 hover:border-primary/50 transition-colors"
           >
-            <div class="text-primary">
+            <div class="text-primary" aria-hidden="true">
               <span class="material-symbols-outlined text-3xl">grid_on</span>
             </div>
             <div class="flex flex-col gap-1">
-              <h2
+              <h3
                 class="text-[#121217] text-lg font-bold leading-tight"
               >
                 Local Geographic Insights
-              </h2>
+              </h3>
               <p
                 class="text-[#6a6783] text-base font-normal leading-normal"
               >
@@ -287,19 +293,19 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                 locations.
               </p>
             </div>
-          </div>
-          <div
+          </article>
+          <article
             class="flex flex-col gap-3 rounded-xl border border-[#dddde4] bg-white p-6 hover:border-primary/50 transition-colors"
           >
-            <div class="text-primary">
+            <div class="text-primary" aria-hidden="true">
               <span class="material-symbols-outlined text-3xl">groups</span>
             </div>
             <div class="flex flex-col gap-1">
-              <h2
+              <h3
                 class="text-[#121217] text-lg font-bold leading-tight"
               >
                 Competitor Analysis
-              </h2>
+              </h3>
               <p
                 class="text-[#6a6783] text-base font-normal leading-normal"
               >
@@ -307,19 +313,19 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                 see the lapses in your local SEO strategies.
               </p>
             </div>
-          </div>
-          <div
+          </article>
+          <article
             class="flex flex-col gap-3 rounded-xl border border-[#dddde4] bg-white p-6 hover:border-primary/50 transition-colors"
           >
-            <div class="text-primary">
+            <div class="text-primary" aria-hidden="true">
               <span class="material-symbols-outlined text-3xl">monetization_on</span>
             </div>
             <div class="flex flex-col gap-1">
-              <h2
+              <h3
                 class="text-[#121217] text-lg font-bold leading-tight"
               >
                 Keyword Economics
-              </h2>
+              </h3>
               <p
                 class="text-[#6a6783] text-base font-normal leading-normal"
               >
@@ -327,21 +333,21 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                 amount of attention each search term gets.
               </p>
             </div>
-          </div>
-          <div
+          </article>
+          <article
             class="flex flex-col gap-3 rounded-xl border border-[#dddde4] bg-white p-6 hover:border-primary/50 transition-colors"
           >
-            <div class="text-primary">
+            <div class="text-primary" aria-hidden="true">
               <span class="material-symbols-outlined text-3xl"
                 >track_changes</span
               >
             </div>
             <div class="flex flex-col gap-1">
-              <h2
+              <h3
                 class="text-[#121217] text-lg font-bold leading-tight"
               >
                 Local Ads Management
-              </h2>
+              </h3>
               <p
                 class="text-[#6a6783] text-base font-normal leading-normal"
               >
@@ -349,7 +355,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                 visibility scales.
               </p>
             </div>
-          </div>
+          </article>
         </div>
       </section>
       <!-- CTA Section -->
@@ -360,10 +366,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           <!-- Background shapes -->
           <div
             class="absolute top-0 left-0 w-full h-full opacity-10 dot-pattern pointer-events-none"
+            aria-hidden="true"
           >
           </div>
           <div
             class="absolute -top-24 -right-24 w-96 h-96 bg-accent rounded-full blur-[100px] opacity-20"
+            aria-hidden="true"
           >
           </div>
           <h2
@@ -399,38 +407,48 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <!-- Footer -->
     <footer
       class="border-t border-gray-200 bg-white/50 backdrop-blur-sm px-10 py-8"
+      role="contentinfo"
     >
       <div
         class="max-w-[1280px] w-full mx-auto flex flex-col md:flex-row justify-between items-center gap-8 md:gap-12"
       >
         <div class="flex items-center gap-3 text-primary">
-          <img src={`${import.meta.env.BASE_URL}favicon.svg`} alt="Proxilyt" class="size-6" />
-          <h2
+          <img 
+            src={`${import.meta.env.BASE_URL}favicon.svg`} 
+            alt="Proxilyt" 
+            class="size-6" 
+          />
+          <h3
             class="text-lg font-bold leading-tight tracking-[-0.015em] mt-[7px]"
             style="font-family: 'League Spartan', sans-serif;"
           >
             Proxilyt
-          </h2>
+          </h3>
         </div>
         <p class="text-gray-500 text-sm hidden lg:block flex-1">
           The leading platform for local search performance and competitive intelligence.
         </p>
         <div class="flex items-center gap-8">
-          <div class="flex gap-6">
+          <nav class="flex gap-6">
             <a
               class="text-gray-500 hover:text-primary transition-colors text-sm font-medium"
-              href={`${import.meta.env.BASE_URL}legal/privacy-policy.pdf`} target="_blank">Privacy Policy</a
+              href={`${import.meta.env.BASE_URL}legal/privacy-policy.pdf`} 
+              target="_blank"
+              rel="noopener noreferrer">Privacy Policy</a
             >
             <a
               class="text-gray-500 hover:text-primary transition-colors text-sm font-medium"
-              href={`${import.meta.env.BASE_URL}legal/terms-of-use.pdf`} target="_blank">Terms of Service</a
+              href={`${import.meta.env.BASE_URL}legal/terms-of-use.pdf`} 
+              target="_blank"
+              rel="noopener noreferrer">Terms of Service</a
             >
-          </div>
-          <div class="flex gap-4">
+          </nav>
+          <nav class="flex gap-4" aria-label="Social links">
             <a
               class="text-gray-400 hover:text-primary transition-colors"
               href="https://www.instagram.com/proxilyt.local/"
               target="_blank"
+              rel="noopener noreferrer"
               aria-label="Instagram"
             >
               <i class="fab fa-instagram text-lg"></i>
@@ -439,6 +457,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
               class="text-gray-400 hover:text-primary transition-colors"
               href="https://www.linkedin.com/company/proxilyt/"
               target="_blank"
+              rel="noopener noreferrer"
               aria-label="LinkedIn"
             >
               <i class="fab fa-linkedin text-lg"></i>
@@ -446,12 +465,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             <a
               class="text-gray-400 hover:text-primary transition-colors"
               href="mailto:main.proxilyt@gmail.com"
-              target="_blank"
               aria-label="Email"
             >
               <i class="fas fa-envelope text-lg"></i>
             </a>
-          </div>
+          </nav>
         </div>
       </div>
       <p class="text-gray-400 text-xs text-center md:text-left mt-6 md:absolute md:bottom-2 md:left-10">

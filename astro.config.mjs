@@ -9,7 +9,13 @@ export default defineConfig({
   site: "https://proxilyt.github.io",
   base: "/proxilyt-marketing/",
   output: 'static',
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      changefreq: 'weekly',
+      priority: 0.8,
+      lastmod: new Date(),
+    })
+  ],
 
   vite: {
     plugins: [tailwind()],
