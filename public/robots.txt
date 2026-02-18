@@ -1,4 +1,18 @@
-User-agent: *
-Allow: /
+# Robots.txt for Proxilyt Marketing Site
+# Last updated: 2026
 
-Sitemap: https://proxilyt.com/sitemap.xml
+User-agent: *
+
+# Slow down Bing slightly
+User-agent: Bingbot
+Crawl-delay: 1
+
+# Block certain SEO crawlers
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+# Sitemap
+Sitemap: https://proxilyt.github.io/proxilyt-marketing/sitemap-index.xml
