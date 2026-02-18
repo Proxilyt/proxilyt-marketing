@@ -2,9 +2,6 @@
 # Last updated: 2026
 
 User-agent: *
-Disallow: /.git/
-Disallow: /.astro/
-Disallow: /node_modules/
 
 # Slow down Bing slightly
 User-agent: Bingbot
