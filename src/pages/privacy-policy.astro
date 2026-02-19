@@ -1,0 +1,200 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<BaseLayout
+  title="Privacy Policy | Proxilyt"
+  description="Privacy Policy for Proxilyt Local SEO Analytics"
+>
+  <div class="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+    <Header isHome={false} />
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-6 py-16 sm:px-8 sm:py-20">
+      <h1
+        class="text-5xl font-bold text-gray-900 mb-4"
+        style="font-family: 'League Spartan', sans-serif;"
+      >
+        Privacy Policy
+      </h1>
+      <p class="text-gray-600 text-sm mb-12">
+        Last updated: {new Date().toLocaleDateString()}
+      </p>
+
+      <div class="prose prose-slate max-w-none text-gray-700">
+        <p>
+          At Proxilyt, we are committed to protecting your privacy. This Privacy
+          Policy explains how we collect, use, disclose, and safeguard your
+          information when you visit our website and use our services.
+          <br />
+          By using our website and services, you consent to this policy.
+        </p>
+
+        <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">
+          1. Information We Collect
+        </h2>
+        <ol class="list-decimal pl-6 space-y-2">
+          <li>
+            <strong>Information You Provide</strong>
+            <ul class="list-disc pl-6 space-y-2">
+              <li>Name</li>
+              <li>Email address</li>
+              <li>Business name</li>
+              <li>Business category</li>
+              <li>Business location</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Automatically Collected Information</strong>
+            <ul class="list-disc pl-6 space-y-2">
+              <li>IP address</li>
+              <li>Device information</li>
+              <li>Browser type</li>
+              <li>Usage Data</li>
+              <li>Cookies</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Analytics & Infrastrucure Providers</strong> we use:
+            <ul class="list-disc pl-6 space-y-2">
+              <li>Supabase (data hosting)</li>
+              <li>Cloudflare (security & perfomance)</li>
+              <li>Google Analytics (traffic analytics)</li>
+            </ul>
+          </li>
+        </ol>
+        <br />
+        <p>
+          These providers may process data in accordance with their privacy
+          policies.
+        </p>
+
+        <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">
+          2. How We Use Your Information
+        </h2>
+        <p>We use your information to:</p>
+
+        <ul class="list-disc pl-6 space-y-2">
+          <li>Provide SEO analytics services</li>
+          <li>Improve platform performance</li>
+          <li>Send service-related emails</li>
+          <li>Send marketing communications (you may unsubscribe anytime)</li>
+          <li>Prevent fraud and abuse</li>
+        </ul>
+
+        <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">
+          3. Legal Basis (India Compliance)
+        </h2>
+        <p>We process personal data under:</p>
+        <ul class="list-disc pl-6 space-y-2">
+          <li>Consent</li>
+          <li>Contractual necessity</li>
+          <li>Legitimate business interests</li>
+          <li>
+            Compliance with applicable Indian laws (Information Technology Act,
+            2000)
+          </li>
+        </ul>
+        <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">
+          4. Data Storage & Security
+        </h2>
+        <p>
+          Your data is stored on Supabase infrastructure. We implement
+          reasonable technical and organizational measures to protect your data.
+          However, no system is 100% secure.
+        </p>
+
+        <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">
+          5. Marketing Emails
+        </h2>
+        <p>We may send marketing emails about:</p>
+        <ul class="list-disc pl-6 space-y-2">
+          <li>Feature updates</li>
+          <li>New services</li>
+          <li>Promotions</li>
+        </ul>
+        <br />
+        <p>You may unsubscribe at any time using the unsubscribe link.</p>
+
+        <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">
+          6. Data Sharing
+        </h2>
+        <p>We do not sell your personal data. We may share data only with:</p>
+        <ul class="list-disc pl-6 space-y-2">
+          <li>Infrastructure providers (Supabase, Cloudflare)</li>
+          <li>Analytics providers (Google Analytics)</li>
+          <li>Legal authorities when required by law</li>
+        </ul>
+
+        <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">
+          7. Data Retention
+        </h2>
+        <p>We retain data as long as:</p>
+        <ul class="list-disc pl-6 space-y-2">
+          <li>Your account remains active</li>
+          <li>Required for legal compliance</li>
+          <li>Necessary for legitimate business purposes</li>
+        </ul>
+        <br />
+        <p>You may request deletion by contacting us.</p>
+
+        <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">
+          8. Your Rights (India)
+        </h2>
+        <p>You have the right to:</p>
+        <ul class="list-disc pl-6 space-y-2">
+          <li>Access your personal data</li>
+          <li>Correct inaccuracies</li>
+          <li>Request deletion</li>
+          <li>Withdraw consent</li>
+        </ul>
+        <br />
+        <p>
+          To exercise rights: <a
+            href="mailto:main.proxilyt@gmail.com"
+            class="text-blue-600 hover:underline">main.proxilyt@gmail.com</a
+          >
+        </p>
+        <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">
+          9. Children's Privacy
+        </h2>
+        <p>
+          Proxilyt is not intended for individuals under 18. We do not knowingly
+          collect data from minors.
+        </p>
+
+        <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">
+          10. International Expansion
+        </h2>
+        <p>
+          If we expand outside India, additional compliance measures (such as
+          GDPR) may apply.
+        </p>
+
+        <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">
+          11. Changes to Privacy Policy
+        </h2>
+        <p>
+          We may update this policy periodically. Continued use constitutes
+          acceptance.
+        </p>
+
+        <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">12. Contact</h2>
+        <p>
+          <strong>Proxilyt</strong>
+          <br />
+          Panchkula, Haryana, India
+          <br />
+          <a
+            href="mailto:main.proxilyt@gmail.com"
+            class="text-blue-600 hover:underline">main.proxilyt@gmail.com</a
+          >
+        </p>
+      </div>
+    </main>
+    <!-- Footer -->
+    <Footer />
+  </div>
+</BaseLayout>

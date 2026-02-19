@@ -1,0 +1,54 @@
+---
+interface Props {
+  isHome?: boolean;
+}
+
+const { isHome = false } = Astro.props;
+---
+
+<header
+  class="flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-200 px-10 py-5 bg-white/80 backdrop-blur-md sticky top-0 z-50"
+  role="banner"
+>
+  <div class="flex items-center gap-4 text-primary">
+    <img 
+      src={`${import.meta.env.BASE_URL}favicon.svg`} 
+      alt="Proxilyt logo" 
+      class="size-10" 
+    />
+    {isHome ? (
+      <h2
+        class="text-2xl font-semibold leading-tight tracking-[-0.015em] mt-[12px] ml-[-6px]"
+        style="font-family: 'League Spartan', sans-serif;"
+      >
+        Proxilyt
+      </h2>
+    ) : (
+      <a
+        href={`${import.meta.env.BASE_URL}`}
+        class="text-2xl font-semibold leading-tight tracking-[-0.015em] mt-[12px] ml-[-6px] hover:text-primary transition-colors"
+        style="font-family: 'League Spartan', sans-serif;"
+      >
+        Proxilyt
+      </a>
+    )}
+  </div>
+  <nav class="flex flex-1 justify-end gap-8">
+    {isHome && (
+      <div class="hidden sm:flex items-center gap-9">
+        <a
+          class="text-sm font-medium hover:text-primary transition-colors"
+          href="#features">Features</a
+        >
+      </div>
+    )}
+    <div class="flex gap-4">
+      <a
+        href="https://app.proxilyt.com"
+        class="flex min-w-[84px] cursor-pointer items-center justify-center rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold shadow-lg shadow-primary/20 hover:scale-105 transition-transform"
+      >
+        <span>Get Started</span>
+      </a>
+    </div>
+  </nav>
+</header>

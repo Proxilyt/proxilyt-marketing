@@ -1,0 +1,70 @@
+---
+---
+
+<footer
+  class="border-t border-gray-200 bg-white/50 backdrop-blur-sm px-10 py-8"
+  role="contentinfo"
+>
+  <div
+    class="max-w-[1280px] w-full mx-auto flex flex-col md:flex-row justify-between items-center gap-8 md:gap-12"
+  >
+    <div class="flex items-center gap-3 text-primary">
+      <img 
+        src={`${import.meta.env.BASE_URL}favicon.svg`} 
+        alt="Proxilyt" 
+        class="size-6" 
+      />
+      <h3
+        class="text-lg font-bold leading-tight tracking-[-0.015em] mt-[7px]"
+        style="font-family: 'League Spartan', sans-serif;"
+      >
+        Proxilyt
+      </h3>
+    </div>
+    <p class="text-gray-500 text-sm hidden lg:block flex-1">
+      The leading platform for local search performance and competitive intelligence.
+    </p>
+    <div class="flex items-center gap-8">
+      <nav class="flex gap-6">
+        <a
+          class="text-gray-500 hover:text-primary transition-colors text-sm font-medium"
+          href={`${import.meta.env.BASE_URL}privacy-policy`}>Privacy Policy</a
+        >
+        <a
+          class="text-gray-500 hover:text-primary transition-colors text-sm font-medium"
+          href={`${import.meta.env.BASE_URL}terms-of-service`}>Terms of Service</a
+        >
+      </nav>
+      <nav class="flex gap-4" aria-label="Social links">
+        <a
+          class="text-gray-400 hover:text-primary transition-colors"
+          href="https://www.instagram.com/proxilyt.local/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram"
+        >
+          <i class="fab fa-instagram text-lg"></i>
+        </a>
+        <a
+          class="text-gray-400 hover:text-primary transition-colors"
+          href="https://www.linkedin.com/company/proxilyt/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn"
+        >
+          <i class="fab fa-linkedin text-lg"></i>
+        </a>
+        <a
+          class="text-gray-400 hover:text-primary transition-colors"
+          href="mailto:main.proxilyt@gmail.com"
+          aria-label="Email"
+        >
+          <i class="fas fa-envelope text-lg"></i>
+        </a>
+      </nav>
+    </div>
+  </div>
+  <p class="text-gray-400 text-xs text-center md:text-left mt-6 md:absolute md:bottom-2 md:left-10">
+    &copy; 2026 Proxilyt Inc. All rights reserved.
+  </p>
+</footer>
