@@ -11,37 +11,57 @@ const { isHome = false } = Astro.props;
   role="banner"
 >
   <div class="flex items-center gap-4 text-primary">
-    <img 
-      src={`${import.meta.env.BASE_URL}favicon.svg`} 
-      alt="Proxilyt logo" 
-      class="size-10" 
+    <img
+      src={`${import.meta.env.BASE_URL}favicon.svg`}
+      alt="Proxilyt logo"
+      class="size-10"
     />
-    {isHome ? (
-      <h2
-        class="text-2xl font-semibold leading-tight tracking-[-0.015em] mt-[12px] ml-[-6px]"
-        style="font-family: 'League Spartan', sans-serif;"
-      >
-        Proxilyt
-      </h2>
-    ) : (
-      <a
-        href={`${import.meta.env.BASE_URL}`}
-        class="text-2xl font-semibold leading-tight tracking-[-0.015em] mt-[12px] ml-[-6px] hover:text-primary transition-colors"
-        style="font-family: 'League Spartan', sans-serif;"
-      >
-        Proxilyt
-      </a>
-    )}
+    {
+      isHome ? (
+        <h2
+          class="text-2xl font-semibold leading-tight tracking-[-0.015em] mt-[12px] ml-[-6px]"
+          style="font-family: 'League Spartan', sans-serif;"
+        >
+          Proxilyt
+        </h2>
+      ) : (
+        <a
+          href={`${import.meta.env.BASE_URL}`}
+          class="text-2xl font-semibold leading-tight tracking-[-0.015em] mt-[12px] ml-[-6px] hover:text-primary transition-colors"
+          style="font-family: 'League Spartan', sans-serif;"
+        >
+          Proxilyt
+        </a>
+      )
+    }
   </div>
   <nav class="flex flex-1 justify-end gap-8">
-    {isHome && (
-      <div class="hidden sm:flex items-center gap-9">
-        <a
-          class="text-sm font-medium hover:text-primary transition-colors"
-          href="#features">Features</a
-        >
-      </div>
-    )}
+    {
+      isHome && (
+        <div class="hidden sm:flex items-center gap-9">
+          <a
+            class="text-sm font-medium hover:text-primary transition-colors"
+            href="#features"
+          >
+            Features
+          </a>
+        </div>
+      )
+    }
+    <div class="hidden sm:flex items-center gap-9">
+      <a
+        class="text-sm font-medium hover:text-primary transition-colors"
+        href={`${import.meta.env.BASE_URL}blog/`}>Blog</a
+      >
+    </div>
+    {
+      /* <a
+      href={`${import.meta.env.BASE_URL}blog/`}
+      class="text-sm font-medium hover:text-primary transition-colors hidden sm:block"
+    >
+      Blog
+    </a> */
+    }
     <div class="flex gap-4">
       <a
         href="https://app.proxilyt.com"

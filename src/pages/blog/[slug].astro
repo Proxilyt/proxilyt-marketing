@@ -1,0 +1,61 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+type Props = {
+  post: (Awaited<ReturnType<typeof getCollection<'blog'>>>)[0];
+};
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<BaseLayout>
+  <div class="flex flex-col min-h-screen">
+    <article class="flex-1 container mx-auto px-4 py-12 max-w-3xl">
+    <div class="mb-8">
+      <h1 class="text-4xl font-bold mb-3">{post.data.title}</h1>
+      <div class="text-gray-600 mb-4">
+        <time>{post.data.pubDate.toLocaleDateString()}</time>
+        {post.data.author && (
+          <>
+            <span> • </span>
+            <span>By {post.data.author}</span>
+          </>
+        )}
+      </div>
+      {post.data.image && (
+        <img src={post.data.image} alt={post.data.title} class="w-full rounded-lg mb-8" />
+      )}
+    </div>
+
+    {post.data.tags && (
+      <div class="flex flex-wrap gap-2 mb-8">
+        {post.data.tags.map((tag: unknown) => (
+          <span class="bg-gray-200 text-gray-800 text-sm px-3 py-1 rounded">
+            {tag}
+          </span>
+        ))}
+      </div>
+    )}
+
+    <div class="prose prose-lg max-w-none">
+      <Content />
+    </div>
+
+    <div class="mt-12 pt-8 border-t">
+      <a href="/proxilyt-marketing/blog/" class="text-blue-600 hover:underline">
+        ← Back to Blog
+      </a>
+    </div>
+  </article>
+  </div>
+</BaseLayout>
