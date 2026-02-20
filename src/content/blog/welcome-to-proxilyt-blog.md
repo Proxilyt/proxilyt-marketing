@@ -3,6 +3,7 @@ title: Welcome to Proxilyt Blog
 description: Our first blog post introducing the Proxilyt blog!
 pubDate: 2026-02-19
 author: Proxilyt Team
+image: https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=800&h=400&fit=crop
 tags: [announcement, welcome]
 ---
 
