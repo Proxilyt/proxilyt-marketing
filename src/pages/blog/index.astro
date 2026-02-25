@@ -5,10 +5,14 @@ import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
 import BlogPostCard from "../../components/BlogPostCard.astro";
 
-const posts = (await getCollection("blog")).sort(
+const allPosts = (await getCollection("blog")).sort(
   (a, b) =>
     new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime(),
 );
+
+// Fixed categories
+const categories = ["Product", "Strategy"];
+const posts = allPosts;
 ---
 
 <BaseLayout
@@ -36,30 +40,37 @@ const posts = (await getCollection("blog")).sort(
             </div>
             <div class="flex gap-2">
               <button
-                class="px-4 py-2 rounded-full border border-gray-200 text-sm font-semibold hover:bg-white transition-colors"
+                class="filter-btn px-4 py-2 rounded-full text-sm font-semibold border border-gray-200 bg-white text-gray-500 hover:text-[var(--color-primary)] transition-colors active"
+                data-filter="all"
               >
                 All Posts
               </button>
-              <button
-                class="px-4 py-2 rounded-full text-sm font-semibold text-gray-500 hover:text-[var(--color-primary)] transition-colors"
-              >
-                Product
-              </button>
-              <button
-                class="px-4 py-2 rounded-full text-sm font-semibold text-gray-500 hover:text-[var(--color-primary)] transition-colors"
-              >
-                Strategy
-              </button>
+              {categories.map((category) => (
+                <button
+                  class="filter-btn px-4 py-2 rounded-full text-sm font-semibold text-gray-500 hover:text-[var(--color-primary)] transition-colors"
+                  data-filter={category.toLowerCase()}
+                >
+                  {category}
+                </button>
+              ))}
             </div>
           </div>
           <div
             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10"
           >
             <div id="initial-posts" class="contents">
-              {posts.slice(0, 6).map((post) => <BlogPostCard post={post} />)}
+              {posts.slice(0, 6).map((post) => (
+                <div data-tags={JSON.stringify(post.data.tags || [])}>
+                  <BlogPostCard post={post} />
+                </div>
+              ))}
             </div>
             <div id="remaining-posts" class="contents hidden">
-              {posts.slice(6).map((post) => <BlogPostCard post={post} />)}
+              {posts.slice(6).map((post) => (
+                <div data-tags={JSON.stringify(post.data.tags || [])}>
+                  <BlogPostCard post={post} />
+                </div>
+              ))}
             </div>
           </div>
           {posts.length > 6 && (
@@ -84,9 +95,53 @@ const posts = (await getCollection("blog")).sort(
 </BaseLayout>
 
 <script>
-  const loadMoreBtn = document.getElementById("load-more-btn");
+  // Filter functionality
+  const filterBtns = document.querySelectorAll(".filter-btn");
+  const initialPosts = document.getElementById("initial-posts");
   const remainingPosts = document.getElementById("remaining-posts");
+  const loadMoreBtn = document.getElementById("load-more-btn");
+  let currentFilter = "all";
 
+  function filterPosts(filter: string) {
+    currentFilter = filter;
+    const allPostDivs = document.querySelectorAll(
+      "#initial-posts > div, #remaining-posts > div"
+    );
+
+    allPostDivs.forEach((postDiv) => {
+      const tagsStr = (postDiv as HTMLElement).getAttribute("data-tags");
+      const tags = tagsStr ? JSON.parse(tagsStr) : [];
+
+      filter = filter.toLowerCase();
+
+      if (filter === "all" || tags.includes(filter)) {
+        (postDiv as HTMLElement).style.display = "";
+      } else {
+        (postDiv as HTMLElement).style.display = "none";
+      }
+    });
+
+    // Update button states
+    filterBtns.forEach((btn) => {
+      const btnFilter = btn.getAttribute("data-filter");
+      if (btnFilter === filter) {
+        btn.classList.add("active", "bg-white", "border", "border-gray-200");
+        btn.classList.remove("text-gray-500");
+      } else {
+        btn.classList.remove("active", "bg-white", "border", "border-gray-200");
+        btn.classList.add("text-gray-500");
+      }
+    });
+  }
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const filter = btn.getAttribute("data-filter") || "all";
+      filterPosts(filter);
+    });
+  });
+
+  // Load more functionality
   if (loadMoreBtn && remainingPosts) {
     loadMoreBtn.addEventListener("click", () => {
       remainingPosts.classList.remove("hidden");
