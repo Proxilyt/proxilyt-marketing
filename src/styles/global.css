@@ -93,3 +93,16 @@
 .prominent-card {
   box-shadow: 0 10px 30px -10px rgba(67, 56, 202, 0.15);
 }
+
+.prose-custom p {
+  @apply mb-6 text-lg leading-relaxed text-gray-700;
+}
+.prose-custom h2 {
+  @apply text-3xl font-black mt-12 mb-6 tracking-tight;
+}
+.prose-custom blockquote {
+  @apply border-l-4 border-primary pl-8 py-2 my-10 italic text-2xl font-medium text-gray-900 bg-primary/5 rounded-r-xl;
+}
+.prose-custom ul {
+  @apply list-disc list-outside ml-6 mb-8 space-y-3 text-gray-700;
+}

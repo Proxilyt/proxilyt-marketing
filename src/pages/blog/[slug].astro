@@ -1,9 +1,12 @@
 ---
-import { getCollection } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import { calculateReadingTime } from "../../utils/readingTime";
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
+  const posts = await getCollection("blog");
   return posts.map((post) => ({
     params: { slug: post.slug },
     props: { post },
@@ -11,51 +14,241 @@ export async function getStaticPaths() {
 }
 
 type Props = {
-  post: (Awaited<ReturnType<typeof getCollection<'blog'>>>)[0];
+  post: Awaited<ReturnType<typeof getCollection<"blog">>>[0];
 };
 
 const { post } = Astro.props;
 const { Content } = await post.render();
+const readingTime = calculateReadingTime(post.body);
+
+// Get related articles
+const allPosts = await getCollection("blog");
+const relatedPosts = allPosts
+  .filter((p) => p.slug !== post.slug)
+  .sort((a, b) => {
+    // Prioritize posts with shared tags
+    const currentTags = post.data.tags || [];
+    const aSharedTags = a.data.tags?.filter((tag) =>
+      currentTags.includes(tag)
+    ).length || 0;
+    const bSharedTags = b.data.tags?.filter((tag) =>
+      currentTags.includes(tag)
+    ).length || 0;
+
+    if (bSharedTags !== aSharedTags) {
+      return bSharedTags - aSharedTags;
+    }
+
+    // Then sort by date
+    return (
+      new Date(b.data.pubDate).getTime() -
+      new Date(a.data.pubDate).getTime()
+    );
+  })
+  .slice(0, 2);
 ---
 
-<BaseLayout>
-  <div class="flex flex-col min-h-screen">
-    <article class="flex-1 container mx-auto px-4 py-12 max-w-3xl">
-    <div class="mb-8">
-      <h1 class="text-4xl font-bold mb-3">{post.data.title}</h1>
-      <div class="text-gray-600 mb-4">
-        <time>{post.data.pubDate.toLocaleDateString()}</time>
-        {post.data.author && (
-          <>
-            <span> • </span>
-            <span>By {post.data.author}</span>
-          </>
-        )}
-      </div>
-      {post.data.image && (
-        <img src={post.data.image} alt={post.data.title} class="w-full rounded-lg mb-8" />
-      )}
-    </div>
-
-    {post.data.tags && (
-      <div class="flex flex-wrap gap-2 mb-8">
-        {post.data.tags.map((tag: unknown) => (
-          <span class="bg-gray-200 text-gray-800 text-sm px-3 py-1 rounded">
-            {tag}
-          </span>
-        ))}
-      </div>
-    )}
-
-    <div class="prose prose-lg max-w-none">
-      <Content />
-    </div>
-
-    <div class="mt-12 pt-8 border-t">
-      <a href="/proxilyt-marketing/blog/" class="text-blue-600 hover:underline">
-        ← Back to Blog
-      </a>
-    </div>
-  </article>
+<BaseLayout
+  title={`${post.data.title} | Proxilyt`}
+  description={post.data.description}
+>
+  <div class="relative min-h-screen w-full flex flex-col overflow-x-hidden">
+    <Header isHome={false} />
+    <main class="flex-grow flex flex-col items-center py-12 px-6">
+      <article class="max-w-4xl w-full">
+        <nav
+          class="flex items-center gap-2 text-sm font-medium text-gray-500 mb-8"
+        >
+          <a
+            class="hover:text-primary"
+            href={`${import.meta.env.BASE_URL}blog/`}>Blog</a
+          >
+          <span class="material-symbols-outlined text-xs">chevron_right</span>
+          <a class="hover:text-primary" href="#">{post.data.title}</a>
+        </nav>
+        <header class="mb-10">
+          <h1
+            class="text-4xl md:text-6xl font-black tracking-tight leading-[1.1] mb-8"
+          >
+            {post.data.title}
+          </h1>
+          {
+            post.data.tags && (
+              <div class="flex flex-wrap gap-2 mb-8">
+                {post.data.tags.map((tag: unknown) => (
+                  <span class="bg-gray-200 text-gray-800 text-sm px-3 py-1 rounded">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )
+          }
+          <div
+            class="flex flex-wrap items-center justify-between gap-6 pb-8 border-b border-gray-200"
+          >
+            <div class="flex items-center gap-4">
+              <div
+                class="size-14 rounded-full bg-gray-200 overflow-hidden ring-4 ring-primary/5"
+              >
+                <img
+                  alt="Author"
+                  class="w-full h-full object-cover"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuA501VXtx1RUsOioxpyuH8Q_8fFWhu_TIwOZcg6TSAL50Q3XqaJ4L_eVwKuDeB7Dwg9e7r4kNkOft61ixdFUuYCorBRp2ouO7rMjdtSlXwIkbO3E-kARjHqJ2RwzGqvlwPg7s6k_T4blmQ_UKm7C_spgp0R7A33hxdcAYrujyDas23m-tUXtNjntR-8vOSFPDPhNhT4HUPtdO2jnU0mS4YaKjYqu9N5FMqhen6XO3mvwTuQkrflVWNfJTA65BEWJZiD31h-5xdQ6dkm"
+                />
+              </div>
+              <div>
+                <p class="font-bold text-lg">{post.data.author}</p>
+              </div>
+            </div>
+            <div
+              class="flex items-center gap-6 text-sm font-semibold text-gray-500 uppercase tracking-wider"
+            >
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-lg"
+                  >calendar_today</span
+                >
+                <span>{post.data.pubDate.toLocaleDateString()}</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-lg">schedule</span>
+                <span>{readingTime} min read</span>
+              </div>
+            </div>
+          </div>
+        </header>
+        <div class="w-full mb-12">
+          <img
+            alt={post.data.title}
+            class="w-full h-auto rounded-3xl shadow-2xl object-cover aspect-[21/9]"
+            src={post.data.image}
+          />
+        </div>
+        <div class="flex flex-col lg:flex-row gap-12 relative">
+          <div class="flex-grow font-serif prose-custom">
+            <Content />
+          </div>
+          <aside class="lg:w-72 flex-shrink-0 flex flex-col gap-10">
+            <div class="sticky top-32 flex flex-col gap-10">
+              <div
+                class="p-6 bg-white rounded-2xl border border-gray-100 shadow-sm"
+              >
+                <h4
+                  class="font-bold mb-4 text-sm uppercase tracking-widest text-gray-400"
+                >
+                  Share Post
+                </h4>
+                <div class="flex gap-3">
+                  <button
+                    id="share-btn"
+                    class="size-10 flex items-center justify-center rounded-lg bg-gray-50 hover:bg-primary hover:text-white transition-all"
+                    title="Share this post"
+                  >
+                    <span class="material-symbols-outlined text-xl">share</span>
+                  </button>
+                  <button
+                    id="copy-link-btn"
+                    class="size-10 flex items-center justify-center rounded-lg bg-gray-50 hover:bg-primary hover:text-white transition-all"
+                    title="Copy link to clipboard"
+                  >
+                    <span class="material-symbols-outlined text-xl">link</span>
+                  </button>
+                  <button
+                    id="email-btn"
+                    class="size-10 flex items-center justify-center rounded-lg bg-gray-50 hover:bg-primary hover:text-white transition-all"
+                    title="Share via email"
+                  >
+                    <span class="material-symbols-outlined text-xl"
+                      >alternate_email</span
+                    >
+                  </button>
+                </div>
+              </div>
+              <div class="hidden lg:flex flex-col gap-6">
+                <h4
+                  class="font-bold text-sm uppercase tracking-widest text-gray-400"
+                >
+                  Related Articles
+                </h4>
+                {relatedPosts.map((relatedPost) => (
+                  <a
+                    class="group flex flex-col gap-3"
+                    href={`/proxilyt-marketing/blog/${relatedPost.slug}/`}
+                  >
+                    <div class="aspect-video overflow-hidden rounded-xl">
+                      <img
+                        class="w-full h-full object-cover transition-transform group-hover:scale-105"
+                        src={relatedPost.data.image}
+                        alt={relatedPost.data.title}
+                      />
+                    </div>
+                    <h5 class="font-bold text-sm leading-snug group-hover:text-primary transition-colors">
+                      {relatedPost.data.title}
+                    </h5>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </aside>
+        </div>
+      </article>
+    </main>
+    <Footer />
   </div>
 </BaseLayout>
+
+<script>
+  const postTitle = document.querySelector("h1")?.textContent || "Check out this article";
+  const postUrl = window.location.href;
+
+  // Share button - Web Share API
+  const shareBtn = document.getElementById("share-btn");
+  if (shareBtn) {
+    shareBtn.addEventListener("click", async () => {
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: postTitle,
+            text: "Check out this blog post from Proxilyt",
+            url: postUrl,
+          });
+        } catch (err) {
+          console.log("Share cancelled or error:", err);
+        }
+      } else {
+        // Fallback to copy link if Web Share API not available
+        navigator.clipboard.writeText(postUrl);
+        alert("Link copied to clipboard!");
+      }
+    });
+  }
+
+  // Copy link button
+  const copyLinkBtn = document.getElementById("copy-link-btn");
+  if (copyLinkBtn) {
+    copyLinkBtn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(postUrl);
+        const originalText = copyLinkBtn.querySelector("span");
+        const originalIcon = originalText?.textContent || "link";
+        originalText!.textContent = "check";
+        setTimeout(() => {
+          originalText!.textContent = originalIcon;
+        }, 2000);
+      } catch (err) {
+        console.log("Failed to copy:", err);
+      }
+    });
+  }
+
+  // Email button
+  const emailBtn = document.getElementById("email-btn");
+  if (emailBtn) {
+    emailBtn.addEventListener("click", () => {
+      const subject = encodeURIComponent(`Check out: ${postTitle}`);
+      const body = encodeURIComponent(
+        `I thought you might find this interesting:\n\n${postTitle}\n\n${postUrl}`
+      );
+      window.location.href = `mailto:?subject=${subject}&body=${body}`;
+    });
+  }
+</script>

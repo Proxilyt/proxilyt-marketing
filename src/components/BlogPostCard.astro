@@ -1,9 +1,12 @@
 ---
+import { calculateReadingTime } from "../utils/readingTime";
+
 interface Props {
   post: any;
 }
 
 const { post } = Astro.props;
+const readingTime = calculateReadingTime(post.body);
 ---
 
 <a
@@ -27,7 +30,7 @@ const { post } = Astro.props;
           <span class="text-gray-300">•</span>
         </>
       )}
-      <span class="text-gray-500">8 min read</span>
+      <span class="text-gray-500">{readingTime} min read</span>
     </div>
     <h3 class="text-2xl font-black leading-tight group-hover:text-primary transition-colors">
       {post.data.title}
