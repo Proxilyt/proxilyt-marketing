@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-    --color-primary: #4338CA;
-  --color-accent: #F59E0B;
-  --color-background-light: #F9FAFB;
+  --color-primary: #4338ca;
+  --color-accent: #f59e0b;
+  --color-background-light: #f9fafb;
   --color-background-dark: #14131f;
 
   --font-display: "Inter", sans-serif;
@@ -77,4 +77,32 @@
 .dark .glass-card {
   background: rgba(20, 19, 31, 0.7);
   border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.blog-card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.blog-card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.prominent-card {
+  box-shadow: 0 10px 30px -10px rgba(67, 56, 202, 0.15);
+}
+
+.prose-custom p {
+  @apply mb-6 text-lg leading-relaxed text-gray-700;
+}
+.prose-custom h2 {
+  @apply text-3xl font-black mt-12 mb-6 tracking-tight;
+}
+.prose-custom blockquote {
+  @apply border-l-4 border-primary pl-8 py-2 my-10 italic text-2xl font-medium text-gray-900 bg-primary/5 rounded-r-xl;
+}
+.prose-custom ul {
+  @apply list-disc list-outside ml-6 mb-8 space-y-3 text-gray-700;
 }
