@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 
 interface ContactFormData {
   name: string;
@@ -60,23 +60,11 @@ export const POST: APIRoute = async ({ request }) => {
       phone: rawData.phone ? String(rawData.phone).trim() : undefined,
     };
 
-    // Configure your email settings
-    // Using environment variables: SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_FROM
-    const smtpPort = parseInt(import.meta.env.SMTP_PORT || '587', 10);
-    const smtpSecure =
-      typeof import.meta.env.SMTP_SECURE === 'string'
-        ? import.meta.env.SMTP_SECURE === 'true'
-        : smtpPort === 465;
-    
-    const transporter = nodemailer.createTransport({
-      host: import.meta.env.SMTP_HOST,
-      port: smtpPort,
-      secure: smtpSecure,
-      auth: {
-        user: import.meta.env.SMTP_USER,
-        pass: import.meta.env.SMTP_PASS,
-      },
-    });
+    // Configure Resend email service
+    // Using environment variable: RESEND_API_KEY
+    const resend = new Resend(import.meta.env.RESEND_API_KEY);
+    const fromEmail = import.meta.env.RESEND_FROM_EMAIL || 'keshav@proxilyt.com';
+    const contactEmailAddress = import.meta.env.CONTACT_EMAIL || 'main.proxilyt@gmail.com';
 
     // Email to your business
     const businessEmailHtml = `
@@ -205,17 +193,17 @@ const userEmailHtml = `
     const sanitizedEmail = data.email.replace(/[\r\n]/g, '');
 
     // Send email to business
-    await transporter.sendMail({
-      from: import.meta.env.SMTP_FROM,
-      to: import.meta.env.CONTACT_EMAIL || 'main.proxilyt@gmail.com',
+    await resend.emails.send({
+      from: fromEmail,
+      to: contactEmailAddress,
       subject: `New Contact Form Submission: ${sanitizedSubject}`,
       html: businessEmailHtml,
       replyTo: sanitizedEmail,
     });
 
     // Send confirmation email to user
-    await transporter.sendMail({
-      from: import.meta.env.SMTP_FROM,
+    await resend.emails.send({
+      from: fromEmail,
       to: sanitizedEmail,
       subject: 'We received your message - Proxilyt',
       html: userEmailHtml,
