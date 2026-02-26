@@ -13,7 +13,9 @@ interface ContactFormData {
 // Allow this endpoint to be dynamic
 export const prerender = false;
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, locals }) => {
+  const env = locals.runtime.env;
+  
   if (request.method !== 'POST') {
     return new Response(JSON.stringify({ error: 'Method not allowed' }), {
       status: 405,
@@ -61,10 +63,20 @@ export const POST: APIRoute = async ({ request }) => {
     };
 
     // Configure Resend email service
-    // Using environment variable: RESEND_API_KEY
-    const resend = new Resend(import.meta.env.RESEND_API_KEY);
-    const fromEmail = import.meta.env.RESEND_FROM_EMAIL || 'keshav@proxilyt.com';
-    const contactEmailAddress = import.meta.env.CONTACT_EMAIL || 'main.proxilyt@gmail.com';
+    // Access environment variables from Cloudflare Pages runtime
+    const resendApiKey = env.RESEND_API_KEY;
+    const fromEmail = env.RESEND_FROM_EMAIL || 'keshav@proxilyt.com';
+    const contactEmailAddress = env.CONTACT_EMAIL || 'main.proxilyt@gmail.com';
+
+    if (!resendApiKey) {
+      console.error('RESEND_API_KEY environment variable is not set');
+      return new Response(
+        JSON.stringify({ error: 'Email service not configured', details: 'Missing RESEND_API_KEY' }),
+        { status: 500, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+
+    const resend = new Resend(resendApiKey);
 
     // Email to your business
     const businessEmailHtml = `
