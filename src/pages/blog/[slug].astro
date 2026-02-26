@@ -172,7 +172,7 @@ const relatedPosts = allPosts
                 {relatedPosts.map((relatedPost) => (
                   <a
                     class="group flex flex-col gap-3"
-                    href={`/proxilyt-marketing/blog/${relatedPost.slug}/`}
+                    href={`${import.meta.env.BASE_URL}blog/${relatedPost.slug}/`}
                   >
                     <div class="aspect-video overflow-hidden rounded-xl">
                       <img

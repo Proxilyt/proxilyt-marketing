@@ -94,7 +94,7 @@ const posts = allPosts;
   </div>
 </BaseLayout>
 
-<script>
+<script lang="ts">
   // Filter functionality
   const filterBtns = document.querySelectorAll(".filter-btn");
   const initialPosts = document.getElementById("initial-posts");
@@ -102,22 +102,23 @@ const posts = allPosts;
   const loadMoreBtn = document.getElementById("load-more-btn");
   let currentFilter = "all";
 
-  function filterPosts(filter: string) {
+  function filterPosts(filter) {
     currentFilter = filter;
     const allPostDivs = document.querySelectorAll(
       "#initial-posts > div, #remaining-posts > div"
     );
 
     allPostDivs.forEach((postDiv) => {
-      const tagsStr = (postDiv as HTMLElement).getAttribute("data-tags");
+      if (!(postDiv instanceof HTMLElement)) return;
+      const tagsStr = postDiv.getAttribute("data-tags");
       const tags = tagsStr ? JSON.parse(tagsStr) : [];
 
       filter = filter.toLowerCase();
 
       if (filter === "all" || tags.includes(filter)) {
-        (postDiv as HTMLElement).style.display = "";
+        postDiv.style.display = "";
       } else {
-        (postDiv as HTMLElement).style.display = "none";
+        postDiv.style.display = "none";
       }
     });
 

@@ -22,22 +22,56 @@ export const POST: APIRoute = async ({ request }) => {
   }
 
   try {
-    const data: ContactFormData = await request.json();
+    const rawData: any = await request.json();
 
-    // Validate required fields
-    if (!data.name || !data.email || !data.subject || !data.message) {
+    // Validate and coerce types
+    if (typeof rawData.name !== 'string' || !rawData.name.trim()) {
       return new Response(
-        JSON.stringify({ error: 'Missing required fields' }),
+        JSON.stringify({ error: 'name must be a non-empty string' }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+    if (typeof rawData.email !== 'string' || !rawData.email.trim()) {
+      return new Response(
+        JSON.stringify({ error: 'email must be a non-empty string' }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+    if (typeof rawData.subject !== 'string' || !rawData.subject.trim()) {
+      return new Response(
+        JSON.stringify({ error: 'subject must be a non-empty string' }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+    if (typeof rawData.message !== 'string' || !rawData.message.trim()) {
+      return new Response(
+        JSON.stringify({ error: 'message must be a non-empty string' }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
       );
     }
 
+    // Coerce optional fields to strings
+    const data: ContactFormData = {
+      name: rawData.name.trim(),
+      email: rawData.email.trim(),
+      subject: rawData.subject.trim(),
+      message: rawData.message.trim(),
+      businessName: rawData.businessName ? String(rawData.businessName).trim() : undefined,
+      phone: rawData.phone ? String(rawData.phone).trim() : undefined,
+    };
+
     // Configure your email settings
     // Using environment variables: SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_FROM
+    const smtpPort = parseInt(import.meta.env.SMTP_PORT || '587', 10);
+    const smtpSecure =
+      typeof import.meta.env.SMTP_SECURE === 'string'
+        ? import.meta.env.SMTP_SECURE === 'true'
+        : smtpPort === 465;
+    
     const transporter = nodemailer.createTransport({
       host: import.meta.env.SMTP_HOST,
-      port: parseInt(import.meta.env.SMTP_PORT || '465'),
-      secure: import.meta.env.SMTP_SECURE === 'true',
+      port: smtpPort,
+      secure: smtpSecure,
       auth: {
         user: import.meta.env.SMTP_USER,
         pass: import.meta.env.SMTP_PASS,
@@ -192,7 +226,7 @@ const userEmailHtml = `
   } catch (error) {
     console.error('Email sending error:', error);
     return new Response(
-      JSON.stringify({ error: 'Failed to send email', details: String(error) }),
+      JSON.stringify({ error: 'Failed to send email' }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }
     );
   }

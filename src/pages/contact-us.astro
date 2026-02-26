@@ -8,7 +8,6 @@ import Footer from "../components/Footer.astro";
   title="Contact Us | Proxilyt"
   description="Get in touch with the Proxilyt team"
 >
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <div class="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex flex-col">
     <Header isHome={false} />
 
@@ -151,12 +150,14 @@ import Footer from "../components/Footer.astro";
   </div>
 </BaseLayout>
 
-<script>
+<script lang="ts">
   const form = document.getElementById("contactForm");
   const successMessage = document.getElementById("successMessage");
   const errorMessage = document.getElementById("errorMessage");
-  const submitBtn = document.getElementById("submitBtn") as HTMLButtonElement;
+  const submitBtn = document.getElementById("submitBtn");
   const btnText = document.getElementById("btnText");
+  
+  if (!(submitBtn instanceof HTMLButtonElement)) throw new Error("Submit button not found");
 
   form?.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -171,7 +172,8 @@ import Footer from "../components/Footer.astro";
     if (btnText) btnText.textContent = "Sending...";
 
     // Get form data
-    const formData = new FormData(form as HTMLFormElement);
+    if (!(form instanceof HTMLFormElement)) throw new Error("Form not found");
+    const formData = new FormData(form);
     const data = {
       name: formData.get("name"),
       email: formData.get("email"),
@@ -182,7 +184,7 @@ import Footer from "../components/Footer.astro";
     };
 
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetch(import.meta.env.BASE_URL + "api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -192,7 +194,7 @@ import Footer from "../components/Footer.astro";
 
       if (response.ok) {
         successMessage?.classList.remove("hidden");
-        (form as HTMLFormElement).reset();
+        form?.reset();
         if (btnText) btnText.textContent = "Message Sent!";
       } else {
         errorMessage?.classList.remove("hidden");
