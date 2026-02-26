@@ -5,19 +5,12 @@ import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
 import { calculateReadingTime } from "../../utils/readingTime";
 
-export async function getStaticPaths() {
-  const posts = await getCollection("blog");
-  return posts.map((post) => ({
-    params: { slug: post.slug },
-    props: { post },
-  }));
+const { slug } = Astro.params;
+const post = (await getCollection("blog")).find((p) => p.slug === slug);
+
+if (!post) {
+  return Astro.redirect("/blog/");
 }
-
-type Props = {
-  post: Awaited<ReturnType<typeof getCollection<"blog">>>[0];
-};
-
-const { post } = Astro.props;
 const { Content } = await post.render();
 const readingTime = calculateReadingTime(post.body);
 
