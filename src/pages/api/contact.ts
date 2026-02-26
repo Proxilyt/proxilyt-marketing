@@ -200,21 +200,23 @@ const userEmailHtml = `
 </body>
 </html>
 `;
-
+    // Normalize user-controlled header values to prevent header injection
+    const sanitizedSubject = data.subject.replace(/[\r\n]/g, ' ');
+    const sanitizedEmail = data.email.replace(/[\r\n]/g, '');
 
     // Send email to business
     await transporter.sendMail({
       from: import.meta.env.SMTP_FROM,
       to: import.meta.env.CONTACT_EMAIL || 'main.proxilyt@gmail.com',
-      subject: `New Contact Form Submission: ${data.subject}`,
+      subject: `New Contact Form Submission: ${sanitizedSubject}`,
       html: businessEmailHtml,
-      replyTo: data.email,
+      replyTo: sanitizedEmail,
     });
 
     // Send confirmation email to user
     await transporter.sendMail({
       from: import.meta.env.SMTP_FROM,
-      to: data.email,
+      to: sanitizedEmail,
       subject: 'We received your message - Proxilyt',
       html: userEmailHtml,
     });
