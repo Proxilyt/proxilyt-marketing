@@ -9,7 +9,9 @@ import tailwind from '@tailwindcss/vite';
 export default defineConfig({
   site: "https://proxilyt.com",
   output: 'server',
-  adapter: cloudflare(),
+  adapter: cloudflare({
+    imageService: 'compile'
+  }),
   integrations: [
     sitemap({
       changefreq: 'weekly',

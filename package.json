@@ -19,5 +19,9 @@
     "@astrojs/cloudflare": "^12.6.12",
     "@tailwindcss/container-queries": "^0.1.1",
     "@tailwindcss/forms": "^0.5.11"
+  },
+  "browser": {
+    "fs": false,
+    "child_process": false
   }
 }
