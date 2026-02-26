@@ -1,0 +1,152 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import BlogPostCard from "../../components/BlogPostCard.astro";
+
+const allPosts = (await getCollection("blog")).sort(
+  (a, b) =>
+    new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime(),
+);
+
+// Fixed categories
+const categories = ["Product", "Strategy"];
+const posts = allPosts;
+---
+
+<BaseLayout
+  title="Blog | Proxilyt"
+  description="Latest updates and insights from Proxilyt"
+>
+  <div
+    class="flex flex-col min-h-screen bg-gradient-to-br from-slate-50 to-slate-100"
+  >
+    <Header isHome={false} />
+    <main class="flex-grow flex flex-col items-center">
+      <div class="max-w-[1280px] w-full px-6 py-12 md:py-20">
+        <div class="flex flex-col gap-12">
+          <div
+            class="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-gray-200 pb-10"
+          >
+            <div class="flex flex-col gap-4 max-w-2xl">
+              <h1 class="text-5xl md:text-6xl font-black tracking-tight">
+                Our Blog
+              </h1>
+              <p class="text-gray-600 text-xl leading-relaxed">
+                Expert insights on local SEO, data analytics, and growing your
+                presence in hyper-local search results.
+              </p>
+            </div>
+            <div class="flex gap-2">
+              <button
+                class="filter-btn px-4 py-2 rounded-full text-sm font-semibold border border-gray-200 bg-white text-gray-500 hover:text-[var(--color-primary)] transition-colors active"
+                data-filter="all"
+              >
+                All Posts
+              </button>
+              {categories.map((category) => (
+                <button
+                  class="filter-btn px-4 py-2 rounded-full text-sm font-semibold text-gray-500 hover:text-[var(--color-primary)] transition-colors"
+                  data-filter={category.toLowerCase()}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10"
+          >
+            <div id="initial-posts" class="contents">
+              {posts.slice(0, 6).map((post) => (
+                <div data-tags={JSON.stringify(post.data.tags || [])}>
+                  <BlogPostCard post={post} />
+                </div>
+              ))}
+            </div>
+            <div id="remaining-posts" class="contents hidden">
+              {posts.slice(6).map((post) => (
+                <div data-tags={JSON.stringify(post.data.tags || [])}>
+                  <BlogPostCard post={post} />
+                </div>
+              ))}
+            </div>
+          </div>
+          {posts.length > 6 && (
+            <div class="flex justify-center mt-12">
+              <button
+                id="load-more-btn"
+                class="flex items-center gap-2 px-8 py-4 bg-white border border-gray-200 rounded-xl font-bold text-sm hover:bg-gray-50 transition-all hover:scale-105 active:scale-95 shadow-sm"
+              >
+                <span>View All Articles</span>
+                <span class="material-symbols-outlined text-base"
+                  >arrow_forward</span
+                >
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+    </main>
+    <!-- Footer -->
+    <Footer />
+  </div>
+</BaseLayout>
+
+<script lang="ts">
+  // Filter functionality
+  const filterBtns = document.querySelectorAll(".filter-btn");
+  const initialPosts = document.getElementById("initial-posts");
+  const remainingPosts = document.getElementById("remaining-posts");
+  const loadMoreBtn = document.getElementById("load-more-btn");
+  let currentFilter = "all";
+
+  function filterPosts(filter) {
+    currentFilter = filter;
+    const allPostDivs = document.querySelectorAll(
+      "#initial-posts > div, #remaining-posts > div"
+    );
+
+    allPostDivs.forEach((postDiv) => {
+      if (!(postDiv instanceof HTMLElement)) return;
+      const tagsStr = postDiv.getAttribute("data-tags");
+      const tags = tagsStr ? JSON.parse(tagsStr) : [];
+
+      filter = filter.toLowerCase();
+
+      if (filter === "all" || tags.includes(filter)) {
+        postDiv.style.display = "";
+      } else {
+        postDiv.style.display = "none";
+      }
+    });
+
+    // Update button states
+    filterBtns.forEach((btn) => {
+      const btnFilter = btn.getAttribute("data-filter");
+      if (btnFilter === filter) {
+        btn.classList.add("active", "bg-white", "border", "border-gray-200");
+        btn.classList.remove("text-gray-500");
+      } else {
+        btn.classList.remove("active", "bg-white", "border", "border-gray-200");
+        btn.classList.add("text-gray-500");
+      }
+    });
+  }
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const filter = btn.getAttribute("data-filter") || "all";
+      filterPosts(filter);
+    });
+  });
+
+  // Load more functionality
+  if (loadMoreBtn && remainingPosts) {
+    loadMoreBtn.addEventListener("click", () => {
+      remainingPosts.classList.remove("hidden");
+      loadMoreBtn.parentElement?.remove();
+    });
+  }
+</script>
