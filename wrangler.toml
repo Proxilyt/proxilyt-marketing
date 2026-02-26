@@ -1,0 +1,6 @@
+name = "proxilyt-marketing"
+main = "./dist/_worker.js"
+compatibility_date = "2026-02-26"
+
+[assets]
+directory = "./dist"
