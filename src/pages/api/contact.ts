@@ -63,7 +63,7 @@ export const POST: APIRoute = async ({ request }) => {
     // Configure Resend email service
     // Using environment variable: RESEND_API_KEY
     const resend = new Resend(import.meta.env.RESEND_API_KEY);
-    const fromEmail = import.meta.env.RESEND_FROM_EMAIL || 'keshav@proxiyt.com';
+    const fromEmail = import.meta.env.RESEND_FROM_EMAIL || 'keshav@proxilyt.com';
     const contactEmailAddress = import.meta.env.CONTACT_EMAIL || 'main.proxilyt@gmail.com';
 
     // Email to your business
